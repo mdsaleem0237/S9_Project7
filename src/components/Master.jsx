@@ -1,0 +1,60 @@
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import "../components/styles.css"
+
+function Master() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
+
+    const handleBtnclickch = () => {
+        if(message == "home"){       
+            navigate("/home", { state: { course: message } });
+        }else if(message == "about"){       
+            navigate("/about", { state: { course: message } });
+        }else{      
+            navigate("/contact", { state: { course: message } });
+        
+        }
+
+    };
+    const handleBtnclick = () => {       
+            navigate("/home", { state: { course: message } });        
+    };
+    const handleBtnclickh = () => {       
+            navigate("/about", { state: { course: message } });        
+    };
+const handleBtnclicka = () => {       
+            navigate("/contact", { state: { course: message } });        
+    };
+
+    return (
+        <>
+            <div className="head">
+                <Link to="/" state={{ course: message }}>Main</Link>
+                <Link to="/home" state={{ course: message }}>Home</Link>
+                <Link to="/about" state={{ course: message }}>About</Link>
+                <Link to="/Contact" state={{ course: message }}>Contact</Link>
+                <br></br>
+                <h1>This is the main page u know!!!!</h1>
+            </div>
+            <input
+                type="text"
+                placeholder="Enter Message"
+                style={{ width: 400, height: 100, padding: 50, color: "blue", backgroundColor: "yellow", fontSize: 20 }}
+                value={message}
+                onChange={(e) => {
+                    setMessage(e.target.value);
+                    localStorage.setItem("msg", e.target.value);
+                }}
+
+            />
+            <button onClick={handleBtnclick} class="glass-btn">Go to home</button>
+            <button onClick={handleBtnclickh} class="glass-btn">Go to about</button>
+            <button onClick={handleBtnclicka} class="glass-btn">Go to contact</button>
+            <button onClick={handleBtnclickch} class="glass-btn"> users choise</button>
+        </>
+    )
+}
+
+export default Master
